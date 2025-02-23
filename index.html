@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Guia de Compras</title>
+  <style>
+    /* RESET BÁSICO */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* ESTILO DAS ABAS */
+    .tabs {
+      position: relative;
+    }
+
+    /* Escondendo os botões de rádio */
+    .tabs input[type="radio"] {
+      display: none;
+    }
+
+    /* Labels que servem como 'botões' das abas */
+    .tab-label {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ddd;
+      color: #333;
+      cursor: pointer;
+      margin-right: 5px;
+      border-radius: 5px 5px 0 0;
+    }
+    .tab-label:hover {
+      background: #ccc;
+    }
+
+    /* Conteúdo das abas - começa escondido */
+    .tab-content {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border-radius: 0 5px 5px 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: -1px;
+    }
+
+    /* Quando o input (aba) está marcado, exibe o conteúdo correspondente */
+    #tab-amazon:checked ~ #amazon,
+    #tab-ml:checked ~ #ml {
+      display: block;
+    }
+
+    /* Aba ativa fica com cor de destaque */
+    #tab-amazon:checked + label[for="tab-amazon"],
+    #tab-ml:checked + label[for="tab-ml"] {
+      background: #007bff;
+      color: #fff;
+    }
+
+    /* GRID DE PRODUTOS */
+    .products-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .product-card h2 {
+      font-size: 1.2em;
+      margin: 10px 0;
+      padding: 0 10px;
+    }
+
+    .product-card a {
+      display: inline-block;
+      margin: 10px 0 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .product-card a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Seu Guia de Compras, Comprar Barato é Aqui!</h1>
+
+    <div class="tabs">
+      <!-- Inputs (botões de rádio) para controlar as abas -->
+      <!-- Marcamos o Amazon como padrão (checked) -->
+      <input type="radio" name="tab" id="tab-amazon" checked>
+      <label class="tab-label" for="tab-amazon">Amazon</label>
+
+      <input type="radio" name="tab" id="tab-ml">
+      <label class="tab-label" for="tab-ml">Mercado Livre</label>
+
+      <!-- CONTEÚDO DA ABA AMAZON -->
+      <div class="tab-content" id="amazon">
+        <div class="products-grid">
+          <!-- PRODUTO 1 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51+9i97Q1mL._AC_SX679_.jpg" alt="Amazon Produto 1">
+            <h2>Mor - Piscina Circular 5.500 Litros</h2>
+            <a href="https://amzn.to/4gMo8Rb" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 2 AMAZON -->
+          <div class="product-card">
+            <img src="data:image/jpeg;base64,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" alt="Amazon Produto 2">
+            <h2>A Black Decker Mixer, Misturador Multiuso e Portátil, M150</h2>
+            <a href="https://amzn.to/4149Rt3" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 3 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/61iGQRiO3AL._AC_SL1200_.jpg" alt="Amazon Produto 3">
+            <h2>Boia Infantil com Colete Salva Vidas Nash - Patrulha Canina Chase</h2>
+            <a href="https://a.co/d/e9XVgcR" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 4 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/41UNWAqZqDL._AC_SL1000_.jpg" alt="Amazon Produto 4">
+            <h2>Sanduicheira Elétrica Cadence Click - 127V</h2>
+            <a href="https://amzn.to/3EKY5g0" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 5 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51uccv-jBiL._AC_SL1000_.jpg" alt="Amazon Produto 5">
+            <h2>Electrolux, Pote Hermético, 12 unidades, A23122901</h2>
+            <a href="https://amzn.to/4i3lzeA" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 6 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51oCxGHT-aL._AC_SL1200_.jpg" alt="Amazon Produto 6">
+            <h2>Jogo de Facas Tramontina Plenus (9 Peças)</h2>
+            <a href="https://amzn.to/3QogWQ" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 7 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51+9i97Q1mL._AC_SX679_.jpg" alt="Amazon Produto 7">
+            <h2>Boia Infantil com Colete Salva Vidas Nash - Patrulha Canina Chase</h2>
+            <a href="https://amzn.to/4gMo8Rb" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 8 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/81poJB-TJ7S._AC_SL1500_.jpg" alt="Amazon Produto 8">
+            <h2>Panela de Pressão Tramontina Vancouver 4,5 L</h2>
+            <a href="https://amzn.to/4i2RzPT" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 9 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51KjY8kbbSS._AC_SL1000_.jpg" alt="Amazon Produto 9">
+            <h2>Mimo Style Espátula Prática Para Confeitar, Raspar, Dividir Massas</h2>
+            <a href="https://amzn.to/4gMEJ7x" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 10 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/51yYe4QlyQL._AC_SL1000_.jpg" alt="Amazon Produto 10">
+            <h2>Mixer Vertical Turbo Chef Elgin 3 em 1 (200W)</h2>
+            <a href="https://amzn.to/4i0oiW7" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 11 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/61f74-WBzSL._AC_SX679_.jpg" alt="Amazon Produto 11">
+            <h2>Piscina Bel Life Armação 5000 L - 305 x 76 cm</h2>
+            <a href="https://amzn.to/41hQq1o" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 12 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/61EjSYBrakL._AC_SX679_.jpg" alt="Amazon Produto 12">
+            <h2>Piscina Circular de Armação Metal 4.485 L</h2>
+            <a href="https://amzn.to/4b2wHGh" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 13 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/71FDh007u5L._AC_SX679_.jpg" alt="Amazon Produto 13">
+            <h2>Piscina 13.000 L + Escada + Cobertura + Lona + Filtro 110v</h2>
+            <a href="https://amzn.to/4hXZgqo" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 14 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/61vk6sgwMKL._AC_SX679_.jpg" alt="Amazon Produto 14">
+            <h2>Kit Limpeza Piscina: Aspirador, Mangueira, Clorador, Escova</h2>
+            <a href="https://amzn.to/4hFYU89" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 15 AMAZON -->
+          <div class="product-card">
+            <img src="https://m.media-amazon.com/images/I/61zy5-uovCL._AC_SX679_.jpg" alt="Amazon Produto 15">
+            <h2>Vôlei Inflável para Piscina com Bola Bestway</h2>
+            <a href="https://amzn.to/430dDX2" target="_blank">Comprar Agora</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTEÚDO DA ABA MERCADO LIVRE -->
+      <div class="tab-content" id="ml">
+        <div class="products-grid">
+          <!-- PRODUTO 1 ML -->
+          <div class="product-card">
+            <img src="https://http2.mlstatic.com/D_Q_NP_2X_798448-MLU78740857142_092024-R.webp" alt="ML Produto 1">
+            <h2>Samsung Galaxy A06, Oferta Imperdível!</h2>
+            <a href="https://mercadolivre.com/sec/1Q6F8NH" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- PRODUTO 2 ML -->
+          <div class="product-card">
+            <img src="https://http2.mlstatic.com/D_Q_NP_2X_702870-MLU77107793300_062024-R.webp" alt="ML Produto 2">
+            <h2>Fone De Ouvido GM2 PRO Lenovo ThinkPlus Bluetooth 5.3</h2>
+            <a href="https://mercadolivre.com/sec/226ipxU" target="_blank">Comprar Agora</a>
+          </div>
+          <!-- Adicione mais produtos ML aqui -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
